@@ -1,5 +1,5 @@
 Django==2.1.12
-# Django==1.11
+# Django==1.11 # original version
 gunicorn==19.7.1
 Pillow==4.3.0
 whitenoise==3.3.1
