@@ -13,21 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings  # these two are for uploading media.
 from django.conf.urls import url, include
-from django.contrib import admin
-from EatripApp import views, apis
-from django.contrib.auth import views as auth_views #setting alias with use of views.
 from django.conf.urls.static import static
-from django.conf import settings #these two are for uploading media.
+from django.contrib import admin
+from django.contrib.auth import views as auth_views  # setting alias with use of views.
 
+from EatripApp import views, apis
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
-    url(r'^restaurant/sign-in/$', auth_views.login,  #using auth_views django will take are of authentication algorithms
-        {'template_name' : 'restaurant/sign_in.html'},
-         name = 'restaurant-sign-in'),
-    url(r'^restaurant/sign-out', auth_views.logout,
+                  url(r'^restaurant/sign-in/$', auth_views.LoginView,
+                      # using auth_views django will take are of authentication algorithms
+                      {'template_name' : 'restaurant/sign_in.html'},
+                      name = 'restaurant-sign-in'),
+                  url(r'^restaurant/sign-out', auth_views.LogoutView,
         {'next_page' : '/'},
         name = 'restaurant-sign-out'),
     url(r'^restaurant/$', views.restaurant_home, name=  'restaurant-home'),
