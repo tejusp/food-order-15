@@ -24,13 +24,13 @@ from EatripApp import views, apis
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
-                  url(r'^restaurant/sign-in/$', auth_views.LoginView,
+                  url(r'^restaurant/sign-in/$', auth_views.LoginView.as_view(),
                       # using auth_views django will take are of authentication algorithms
                       {'template_name' : 'restaurant/sign_in.html'},
                       name = 'restaurant-sign-in'),
-                  url(r'^restaurant/sign-out', auth_views.LogoutView,
-        {'next_page' : '/'},
-        name = 'restaurant-sign-out'),
+                  url(r'^restaurant/sign-out', auth_views.LogoutView.as_view(),
+                      {'next_page' : '/'},
+                      name = 'restaurant-sign-out'),
     url(r'^restaurant/$', views.restaurant_home, name=  'restaurant-home'),
     url(r'^restaurant/sign-up',views.restaurant_sign_up,
         name = 'restaurant-sign-up'),
